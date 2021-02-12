@@ -13,6 +13,8 @@ function init() {
 function loop() {
   console.log("loop");
 
+  setTimeout(loop, 1000);
+
   getNumberOfCustomers();
 }
 
@@ -23,10 +25,21 @@ function getNumberOfCustomers() {
   return Math.floor(Math.random() * 32);
 
   displayData();
+  modifyModel();
 }
 
 function displayData() {
   console.log("displayData");
+
+  //Clear the container first
+  document.querySelector("#bars").innerHTML = "";
+
+  for (let i = 0; i <= 40; i++) {
+    const bar = document.createElement("div");
+    bar.classList.add("bar");
+    bar.style.height = (model[i] / 32) * 100 + "%";
+    document.querySelector("#bars").append(bar);
+  }
 
   //Add the current number of customers to the bar-chart:
   const queueSize = getNumberOfCustomers();
@@ -36,4 +49,7 @@ function displayData() {
 
 function modifyModel() {
   console.log("modifyModel");
+
+  model.shift();
+  model.push(queueSize);
 }
