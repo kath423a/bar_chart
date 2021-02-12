@@ -10,6 +10,8 @@ function init() {
   loop();
 }
 
+let queueSize = 0;
+
 function loop() {
   console.log("loop");
 
